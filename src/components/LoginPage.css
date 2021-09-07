@@ -1,0 +1,7 @@
+.formContainer {
+  width: 40vw;
+  height: 60vh;
+  background-color: rgb(204, 191, 191);
+  padding: 5vw;
+  margin: 5vw;
+}

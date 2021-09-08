@@ -7,7 +7,7 @@ export default class LoginPage extends Component {
         super (props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
         }
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
@@ -39,7 +39,9 @@ export default class LoginPage extends Component {
         })
         .then(res => res.json())
         .then((data) => {
-            console.log(data);
+            localStorage.setItem('token', data.access_token);
+        
+            console.log('token', data);
         })
         .catch((err) => {
             console.error(err);

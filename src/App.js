@@ -1,22 +1,28 @@
 import LoginPage from './components/LoginPage';
+import MainPage from './components/MainPage';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import PrivateRoute from 'routes/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <LoginPage/>
             </Route>
-            <PrivateRoute path="/" isAuthenticated={isAuthenticated} >
-              <ProtectedRoutes />
-            </PrivateRoute>
+            <Route exact path="/main">
+              <MainPage/>
+            </Route>
+            <Route path="*" component={
+              () => "404 NOT FOUND"
+            }>
+
+            </Route>
+            
         </Switch>
       </Router>
     </div>

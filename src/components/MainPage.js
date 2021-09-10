@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import './MainPage.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import Header from './Header';
 
 class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            trainInfo: []
+            trainInfo: [],
+            coordinates: [],
+            trainNo: ''
         }
+        this.handleMap = this.handleMap.bind(this)
     }
 
     componentDidMount() {
@@ -34,11 +37,45 @@ class MainPage extends Component {
 
     }
 
+    handleMap () {
+        let tokenKey = localStorage.getItem('token');
+        
+
+        fetch('https://indian-railway.vercel.app/api/trains/04728' , {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + tokenKey
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => { 
+            this.setState({
+                coordinates: data.geometry.coordinates,
+                trainNo: data.properties.number
+            })
+            console.log(this.state.trainNo);
+            console.log(this.state.coordinates);
+
+            
+
+        })
+    }
+
 
     render() {
-        const items = this.state.trainInfo.map(i => <> <p>{i.number}</p> <p>{i.name}</p> <hr/> </>);
+        const items = this.state.trainInfo.map(i => 
+        <div onClick={this.handleMap}> 
+            <p>{i.number}</p> 
+            <p>{i.name}</p> 
+            <hr/> 
+        </div>
+    );
+
+    const limeOptions = { color: 'lime' }
 
         return (
+            
             <>
                 <Header/>
             <div className="main-container">
@@ -55,6 +92,7 @@ class MainPage extends Component {
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
                                 />
+                                <Polyline pathOptions={limeOptions} key={this.state.trainNo} positions={this.state.coordinates} />
                             </MapContainer>
                         </div>
 

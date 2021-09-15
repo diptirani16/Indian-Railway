@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './LoginPage.css';
+import auth from './Auth';
 
-export default class LoginPage extends Component {
+import { withRouter } from 'react-router-dom'
+
+class LoginPage extends Component {
 
     constructor(props) {
         super (props);
@@ -13,6 +16,7 @@ export default class LoginPage extends Component {
         this.handlePassword = this.handlePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
 
     handleUsername (e) {
         this.setState ({
@@ -30,17 +34,19 @@ export default class LoginPage extends Component {
         event.preventDefault();
 
         const { username, password } = this.state;
-
+        
         fetch('https://indian-railway.vercel.app/api/login' , {
             method: 'POST',
             headers: {
                 'Authorization': 'Basic ' + btoa(`${username}:${password}`)
             }
         })
-        .then(res => res.json())
+        .then(res => 
+            res.json()
+        )
         .then((data) => {
             localStorage.setItem('token', data.access_token);
-        
+            
             console.log('token', data);
         })
         .catch((err) => {
@@ -61,7 +67,13 @@ export default class LoginPage extends Component {
                         <input type="password" onChange={this.handlePassword} value = {this.state.password}  className="form-control" id="exampleInputPassword1" />
                     </div>
                 
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary" onClick={
+                        () => {
+                            auth.login(() => {
+                                this.props.history.push('/main');
+                            })
+                        }
+                    }>Login</button>
                    
                 </form>
             </div>
@@ -69,3 +81,5 @@ export default class LoginPage extends Component {
         )
     }
 }
+
+export default withRouter(LoginPage)

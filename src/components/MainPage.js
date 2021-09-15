@@ -9,8 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import sourceImg from '../icons/source.png'
 import destinationImg from '../icons/destination.png';
-import PaginationControlled from './Pagination';
-import Pagination from '@material-ui/lab/Pagination'
+import Pagination from '@material-ui/lab/Pagination';
 
 class MainPage extends Component {
     constructor(props) {
@@ -76,7 +75,7 @@ class MainPage extends Component {
                 this.setState({
                     trainInfo: data.result,
                     anchorEl: null,
-                    page: 2
+                    page: pageNo
                 })
                 console.log('hello')
             })
@@ -248,14 +247,8 @@ class MainPage extends Component {
                             <PerfectScrollbar style={{ height: '72vh' }}>
                                 {items}
                             </PerfectScrollbar>
-                            {/* <PaginationControlled/> */}
                             <div className="buttonContainer">
-                                <Pagination count={this.state.noOfPages} page={this.state.page} onChange={() => this.handlePage(this.state.page)} color="primary" shape="rounded"/>
-
-                                {/* {
-                                    this.state.buttonsArray.map((x) => <button className="btn btn-outline-dark mb-1" onClick={() => this.handlePage(x)}>{x}</button>)
-
-                                } */}
+                                <Pagination count={this.state.noOfPages} page={this.state.page} onChange={(_, page) => this.handlePage(page)} color="primary" shape="rounded"/>
 
 
                             </div>
@@ -267,12 +260,12 @@ class MainPage extends Component {
                                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     />
-                                    <Marker key={this.state.trainNo} position={this.state.fromStation} icon={ iconSource }>
+                                    <Marker key="source" position={this.state.fromStation} icon={ iconSource }>
                                         <Popup>
                                             Source
                                         </Popup>
                                     </Marker>
-                                    <Marker key={this.state.trainNo} position={this.state.toStation} icon={ iconDestination }>
+                                    <Marker key="destination" position={this.state.toStation} icon={ iconDestination }>
                                         <Popup>
                                             Destination
                                         </Popup>

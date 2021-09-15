@@ -5,21 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  Link,
 } from "react-router-dom";
-
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//   const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-//   useEffect(() => {
-//     const token = localStorage.getItem('token')
-//     console.log("Token: ", token)
-//     setIsAuthenticated(!!token)
-//   },[rest.path])
-
-//   return isAuthenticated ? <Route render={(props) => <Component {...props} {...rest}/>} /> : <Redirect to="/" />
-// }
 
 
 function App() {

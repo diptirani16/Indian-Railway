@@ -4,11 +4,7 @@ import auth from './Auth';
 import { withRouter } from 'react-router-dom'
 
 class Header extends Component {
-    constructor(props){
-        super(props);
 
-        
-    }
     render () {
         return (
             <div className="d-flex justify-content-between bg-dark text-light fixed-top" style={{padding: '1%'}}>

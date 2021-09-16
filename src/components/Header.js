@@ -12,6 +12,7 @@ class Header extends Component {
                 <div><button className="text-light bg-dark mx-4" onClick={
                     () => {
                         auth.logout(() => {
+                            localStorage.removeItem('token')
                             this.props.history.push('/');
                         })
                     }

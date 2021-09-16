@@ -1,20 +1,22 @@
 class Auth {
+    #authenticated;
+
     constructor() {
-        this.authenticated = false;
+        this.#authenticated = false;
     }
 
     login(cb) {
-        this.authenticated = true;
+        this.#authenticated = true;
         cb();
     }
 
     logout(cb) {
-        this.authenticated = false;
+        this.#authenticated = false;
         cb();
     }
 
-    isAuthenticated () {
-        return this.authenticated;
+    isAuthenticated() {
+        return this.#authenticated;
     }
 }
 

@@ -36,6 +36,10 @@ class MainPage extends Component {
     componentDidMount() {
         let tokenKey = localStorage.getItem('token');
 
+        console.log('Login SuccesssFull....!')
+
+        console.log('Token: ', tokenKey)
+
         fetch('https://indian-railway.vercel.app/api/trains?page=1', {
             method: 'GET',
             headers: {

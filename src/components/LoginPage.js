@@ -45,13 +45,19 @@ class LoginPage extends Component {
             res.json()
         )
         .then((data) => {
-            localStorage.setItem('token', data.access_token);
-            
-            console.log('token', data);
+            if(data.access_token) {
+                localStorage.setItem('token', data.access_token);
+                auth.login(() => {
+                    this.props.history.push('/main');
+                })
+                
+                console.log('token', data);
+            } else throw new Error(data.detail)
         })
         .catch((err) => {
-            console.error(err);
+            alert(err);
         })
+
     }
 
     render() {
@@ -67,19 +73,13 @@ class LoginPage extends Component {
                         <input type="password" onChange={this.handlePassword} value = {this.state.password}  className="form-control" id="exampleInputPassword1" />
                     </div>
                 
-                    <button type="submit" className="btn btn-primary" onClick={
-                        () => {
-                            auth.login(() => {
-                                this.props.history.push('/main');
-                            })
-                        }
-                    }>Login</button>
+                    <button type="submit" className="btn btn-primary">Login</button>
                    
                 </form>
             </div>
 
         )
-    }
+    }   
 }
 
 export default withRouter(LoginPage)

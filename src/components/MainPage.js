@@ -252,7 +252,7 @@ class MainPage extends Component {
                                 {items}
                             </PerfectScrollbar>
                             <div className="buttonContainer">
-                                <Pagination count={this.state.noOfPages} page={this.state.page} onChange={(_, page) => this.handlePage(page)} color="primary" shape="rounded"/>
+                            <Pagination count={this.state.noOfPages} page={this.state.page} onChange={(_, page) => this.handlePage(page)} color="primary" shape="rounded"/>
 
 
                             </div>

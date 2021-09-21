@@ -1,7 +1,15 @@
 .formContainer {
   width: 40vw;
-  height: 60vh;
-  background-color: rgb(204, 191, 191);
-  padding: 5vw;
+  height: auto;
+  background-color: rgb(232, 227, 227);
+  padding: 1vw 5vw;
   margin: 5vw;
+  text-align: center;
+}
+
+@media screen and (max-width: 400px){
+  .formContainer {
+    width: 90vw;
+    height: auto;
+  }
 }

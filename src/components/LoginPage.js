@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './LoginPage.css';
 import auth from './Auth';
+import trainLogo from '../icons/train.png';
 
 import { withRouter } from 'react-router-dom'
 
@@ -33,6 +34,8 @@ class LoginPage extends Component {
     handleSubmit (event) {
         event.preventDefault();
 
+        console.log('hello')
+
         const { username, password } = this.state;
         
         fetch('https://indian-railway.vercel.app/api/login' , {
@@ -63,18 +66,21 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="formContainer">
+                <img src={trainLogo} width="40%" height="50%" />
                 <form onSubmit={this.handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
-                        <input type="text" onChange={this.handleUsername} value = {this.state.username} className="form-control" id="exampleInputEmail1"/>
+                    <div className="form-group row mt-4 mb-3">
+                        <label htmlFor="exampleInputEmail1" className="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10 px-4">
+                            <input type="text" onChange={this.handleUsername} value = {this.state.username} className="form-control" id="exampleInputEmail1"/>
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" onChange={this.handlePassword} value = {this.state.password}  className="form-control" id="exampleInputPassword1" />
+                    <div className=" form-group row mb-3">
+                        <label htmlFor="exampleInputPassword1" className="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10 px-4">
+                            <input type="password" onChange={this.handlePassword} value = {this.state.password}  className="form-control" id="exampleInputPassword1" />
+                        </div>
                     </div>
-                
                     <button type="submit" className="btn btn-primary">Login</button>
-                   
                 </form>
             </div>
 
